@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRENT RADIO | 24/7 Brent Faiyaz Audio Experience</title>
+  <meta name="description" content="24/7 uninterrupted streaming radio station dedicated to Brent Faiyaz, Sonder, and ambient R&B vibes.">
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta property="og:title" content="BRENT RADIO - 24/7 Brent Faiyaz Stream">
+  <meta property="og:description" content="Immersive 24/7 R&B broadcast station featuring Brent Faiyaz, Sonder discography, live audio visualizers, and interactive community chat.">
+  <meta property="og:type" content="website">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts: Syncopate & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brentBlack: '#0a0a0c',
+            brentDark: '#121217',
+            brentPanel: 'rgba(20, 20, 27, 0.85)',
+            brentRose: '#e11d48',
+            brentCyan: '#06b6d4',
+            brentAmber: '#f59e0b',
+            highContrastBg: '#000000',
+            highContrastText: '#ffffff'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Syncopate', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom High-Contrast & Accessibility styles */
+    .high-contrast {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+    }
+    .high-contrast button, .high-contrast div {
+      border-color: #ffffff !important;
+    }
+    .high-contrast input {
+      background: #111111 !important;
+      color: #ffffff !important;
+      border: 2px solid #ffffff !important;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: rgba(10, 10, 14, 0.8); }
+    ::-webkit-scrollbar-thumb { background: rgba(225, 29, 72, 0.4); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(225, 29, 72, 0.8); }
+
+    /* Custom Audio Sliders */
+    input[type=range] {
+      -webkit-appearance: none;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+      height: 4px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 12px;
+      width: 12px;
+      border-radius: 50%;
+      background: #e11d48;
+      cursor: pointer;
+      box-shadow: 0 0 10px #e11d48;
+      transition: transform 0.1s ease-in-out;
+    }
+    input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
+
+    /* Keyframe Animations */
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.9; }
+      50% { transform: scale(1.08); opacity: 0.4; }
+      100% { transform: scale(0.95); opacity: 0.9; }
+    }
+    .pulse-dot { animation: pulse-ring 2s infinite ease-in-out; }
+
+    /* Focus Visible Outline for Accessibility */
+    *:focus-visible {
+      outline: 2px solid #06b6d4 !important;
+      outline-offset: 2px;
+    }
+  </style>
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RadioStation",
+    "name": "BRENT RADIO",
+    "url": "https://brentradio.fm",
+    "genre": "R&B / Soul / Ambient",
+    "description": "24/7 dedicated broadcast channel streaming songs and ambient soundscapes inspired by Brent Faiyaz & Sonder."
+  }
+  </script>
+</head>
+<body class="bg-brentBlack text-gray-100 font-sans min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-brentRose selection:text-white transition-colors duration-200" id="appBody">
+
+  <!-- Canvas Noise Overlay & Ambient Spectrum -->
+  <canvas id="bgCanvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-20" aria-hidden="true"></canvas>
+
+  <!-- Skip to Content Link (WCAG 2.1 AA) -->
+  <a href="#mainContent" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-3 focus:bg-brentRose focus:text-white font-bold">Skip to Main Content</a>
+
+  <!-- Header Banner & Accessibility Controls -->
+  <header class="relative z-10 w-full border-b border-rose-950/40 backdrop-blur-md bg-brentBlack/90 px-4 sm:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brentRose via-purple-700 to-brentCyan p-0.5 shadow-lg shadow-rose-950/50">
+        <div class="w-full h-full bg-brentBlack rounded-[10px] flex items-center justify-center">
+          <i class="fa-solid fa-compact-disc text-brentRose text-lg animate-spin" style="animation-duration: 8s;"></i>
+        </div>
+      </div>
+      <div>
+        <h1 class="font-display font-bold text-lg sm:text-xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-brentRose">
+          BRENT<span class="text-brentRose">RADIO</span>
+        </h1>
+        <p class="text-[10px] text-gray-400 font-mono tracking-widest uppercase">24/7 Sonder &amp; Wasteland Broadcast</p>
+      </div>
+    </div>
+
+    <!-- On Air Indicator, Admin Login & Accessibility Tools -->
+    <div class="flex items-center space-x-2 sm:space-x-3">
+      <div class="flex items-center space-x-2 bg-rose-950/70 border border-rose-500/40 px-3 py-1 rounded-full shadow-md" aria-label="Broadcast Status: On Air">
+        <span class="w-2.5 h-2.5 bg-brentRose rounded-full pulse-dot"></span>
+        <span class="font-display font-bold text-[11px] tracking-widest text-rose-300 uppercase">ON AIR</span>
+      </div>
+
+      <!-- Admin Passcode Auth Button -->
+      <button id="adminLoginToggleBtn" aria-label="Admin DJ Console Passcode Login" class="px-3 py-1.5 text-xs rounded-lg bg-rose-950/80 border border-rose-700 text-rose-300 hover:bg-brentRose hover:text-white font-mono transition flex items-center gap-1.5 shadow-md">
+        <i class="fa-solid fa-lock text-xs" id="adminLockIcon"></i>
+        <span id="adminBtnText" class="font-bold">ADMIN DJ LOGIN</span>
+      </button>
+
+      <!-- High Contrast Accessibility Toggle -->
+      <button id="contrastToggleBtn" aria-label="Toggle High Contrast Mode" title="Toggle High Contrast Mode" class="p-2 text-xs rounded-lg bg-gray-900 border border-gray-800 text-gray-300 hover:text-white hover:border-brentCyan transition">
+        <i class="fa-solid fa-circle-half-stroke text-sm"></i>
+      </button>
+
+      <!-- GitHub Repo Structure Modal Trigger -->
+      <button id="githubModalBtn" aria-label="View Code & Project Repository" title="View GitHub Code Structure" class="px-3 py-1.5 text-xs rounded-lg bg-gray-900 border border-gray-800 text-cyan-400 font-mono hover:bg-gray-800 transition flex items-center gap-2">
+        <i class="fa-brands fa-github text-sm"></i>
+        <span class="hidden sm:inline">GitHub Code Repo</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Broadcast Content -->
+  <main id="mainContent" class="relative z-10 max-w-7xl w-full mx-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 flex-grow">
+
+    <!-- Left Broadcast Column (8 Cols) -->
+    <section class="lg:col-span-8 flex flex-col gap-6">
+
+      <!-- Main Player Deck with Spinning Vinyl Record -->
+      <div class="bg-brentPanel border border-rose-950/30 backdrop-blur-xl rounded-2xl p-5 sm:p-6 shadow-2xl relative">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="text-[10px] font-mono text-brentRose uppercase tracking-widest">CURRENT BROADCAST</span>
+              <span id="albumBadge" class="text-[10px] font-mono bg-rose-950/90 text-rose-300 border border-rose-800/60 px-2 py-0.5 rounded">Album: WASTELAND</span>
+            </div>
+            <h2 id="currentTrackTitle" class="font-display text-xl sm:text-2xl font-bold text-white mt-1">
+              ALL MINE
+            </h2>
+            <p id="currentTrackArtist" class="text-xs text-gray-400">Brent Faiyaz &bull; Sonder 24/7 Stream</p>
+          </div>
+          
+          <div class="flex items-center space-x-2">
+            <button id="visModeBtn" aria-label="Switch Audio Visualizer Style" class="px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800 hover:border-brentCyan text-cyan-400 text-xs font-mono transition">
+              <i class="fa-solid fa-chart-simple mr-1"></i> VIS: <span id="visModeText">BARS</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Album Vinyl Record Deck + Dynamic Canvas Visualizer -->
+        <div class="relative w-full h-72 sm:h-80 rounded-xl bg-brentBlack border border-rose-950/50 overflow-hidden flex items-center justify-center group">
+          
+          <!-- Interactive Spinning Vinyl Graphic Frame -->
+          <div class="absolute inset-0 z-10 p-4 flex items-center justify-center pointer-events-none">
+            <div class="relative w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center">
+              
+              <!-- Outer Vinyl Grooves -->
+              <div id="vinylRecord" class="w-full h-full rounded-full bg-gradient-to-tr from-neutral-900 via-black to-neutral-800 p-2 shadow-2xl border-4 border-neutral-800 flex items-center justify-center transition-transform duration-700 ease-linear" style="box-shadow: 0 0 35px rgba(0,0,0,0.9), inset 0 0 15px rgba(255,255,255,0.05);">
+                <div class="w-full h-full rounded-full border border-neutral-700/40 p-2 flex items-center justify-center">
+                  <div class="w-full h-full rounded-full border border-neutral-800 p-2 flex items-center justify-center">
+                    <div class="w-full h-full rounded-full border border-neutral-700/30 p-2 flex items-center justify-center">
+                      
+                      <!-- Center Spinning Label with Dynamic Track Title -->
+                      <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-brentRose via-purple-900 to-brentCyan p-1 flex flex-col items-center justify-center text-center shadow-inner relative overflow-hidden">
+                        <div class="w-full h-full rounded-full bg-brentBlack/90 flex flex-col items-center justify-center p-1 border border-rose-500/30">
+                          <span id="vinylSongLabel" class="text-[9px] font-bold text-white truncate max-w-[70px] uppercase font-display leading-tight">ALL MINE</span>
+                          <span id="vinylArtistLabel" class="text-[7px] text-brentRose font-mono truncate max-w-[65px] mt-0.5">Brent Faiyaz</span>
+                          <div class="w-3 h-3 rounded-full bg-black border-2 border-gray-400 mt-1"></div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tonearm Styling -->
+              <div class="absolute -top-2 -right-2 w-16 h-28 pointer-events-none opacity-80 hidden sm:block">
+                <div class="w-3 h-3 rounded-full bg-gray-400 border border-gray-200"></div>
+                <div class="w-1 h-20 bg-gradient-to-b from-gray-400 to-gray-600 transform rotate-12 origin-top-left shadow-lg"></div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Spectrum Visualizer -->
+          <canvas id="visualizerCanvas" class="w-full h-full relative z-0 opacity-80"></canvas>
+
+          <!-- Initial Sync/Play Button Overlay -->
+          <div id="playOverlay" class="absolute inset-0 bg-brentBlack/90 flex flex-col items-center justify-center z-30 backdrop-blur-sm transition-opacity">
+            <button id="startStreamBtn" aria-label="Sync and Start 24/7 Stream" class="px-8 py-4 rounded-full bg-gradient-to-r from-brentRose via-purple-600 to-brentCyan text-white font-display font-bold tracking-widest hover:scale-105 transition shadow-lg shadow-rose-950/80 flex items-center gap-3">
+              <i class="fa-solid fa-play"></i> TUNE INTO BRENT RADIO 24/7
+            </button>
+            <p class="text-xs text-gray-400 mt-3 font-mono">Web Audio Engine &bull; Continuous Playback</p>
+          </div>
+        </div>
+
+        <!-- Track Time Bar -->
+        <div class="mt-4 space-y-1">
+          <div class="flex justify-between text-xs font-mono text-gray-400">
+            <span id="currentTime">00:00</span>
+            <span id="durationTime">Continuous 24/7</span>
+          </div>
+          <div class="relative w-full h-2 bg-gray-800 rounded-full overflow-hidden cursor-pointer" id="progressBarContainer">
+            <div id="progressBar" class="h-full bg-gradient-to-r from-brentRose to-brentCyan w-0 rounded-full"></div>
+          </div>
+        </div>
+
+        <!-- Audio Player Controls -->
+        <div class="mt-5 flex flex-wrap items-center justify-between gap-4">
+          <div class="flex items-center space-x-3">
+            <button id="mainPlayBtn" aria-label="Play or Pause Stream" class="w-12 h-12 rounded-full bg-brentRose text-white flex items-center justify-center font-bold hover:scale-105 transition shadow-lg shadow-rose-950/60">
+              <i class="fa-solid fa-play text-lg" id="mainPlayIcon"></i>
+            </button>
+            <div>
+              <span class="text-xs font-semibold text-gray-200 block">Stream Audio Mode</span>
+              <span id="audioSourceText" class="text-[10px] font-mono text-brentCyan">24/7 Continuous Broadcast Engine</span>
+            </div>
+          </div>
+
+          <!-- Audio Equalizer Quick Trigger & Volume Slider -->
+          <div class="flex items-center space-x-3">
+            <button id="muteBtn" aria-label="Mute or Unmute Audio" class="p-2 text-gray-400 hover:text-white transition">
+              <i class="fa-solid fa-volume-high text-sm" id="muteIcon"></i>
+            </button>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.8" class="w-28 sm:w-36" aria-label="Audio Volume Control">
+          </div>
+        </div>
+      </div>
+
+      <!-- 3-Band Equalizer Deck -->
+      <div class="bg-brentPanel border border-rose-950/30 backdrop-blur-xl rounded-2xl p-5 shadow-xl">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-sliders text-brentRose"></i>
+            <h3 class="font-display text-xs font-bold tracking-wider text-white">SOUND FREQUENCY EQUALIZER</h3>
+          </div>
+          <div class="flex items-center gap-1.5 text-xs">
+            <span class="text-gray-400 mr-1 hidden sm:inline text-[11px]">Presets:</span>
+            <button class="eq-preset-btn px-2.5 py-1 rounded bg-rose-950/60 border border-rose-800/40 text-rose-300 hover:bg-rose-900 transition text-xs" data-preset="wasteland">Wasteland</button>
+            <button class="eq-preset-btn px-2.5 py-1 rounded bg-gray-900 border border-gray-800 text-gray-300 hover:bg-gray-800 transition text-xs" data-preset="synth">Synth Chill</button>
+            <button class="eq-preset-btn px-2.5 py-1 rounded bg-gray-900 border border-gray-800 text-gray-300 hover:bg-gray-800 transition text-xs" data-preset="bass">Bass Boost</button>
+            <button class="eq-preset-btn px-2.5 py-1 rounded bg-gray-900 border border-gray-800 text-gray-300 hover:bg-gray-800 transition text-xs" data-preset="vocal">Vocal</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 text-center">
+          <div class="bg-brentBlack/60 p-3 rounded-xl border border-gray-800 flex flex-col items-center">
+            <label for="bassSlider" class="text-[10px] font-mono text-gray-400 mb-1">BASS (60Hz)</label>
+            <input type="range" id="bassSlider" min="-12" max="12" value="0" step="0.5" class="w-full">
+            <span id="bassVal" class="text-[11px] font-mono text-brentRose mt-1">0 dB</span>
+          </div>
+          <div class="bg-brentBlack/60 p-3 rounded-xl border border-gray-800 flex flex-col items-center">
+            <label for="midSlider" class="text-[10px] font-mono text-gray-400 mb-1">MID (1kHz)</label>
+            <input type="range" id="midSlider" min="-12" max="12" value="0" step="0.5" class="w-full">
+            <span id="midVal" class="text-[11px] font-mono text-brentRose mt-1">0 dB</span>
+          </div>
+          <div class="bg-brentBlack/60 p-3 rounded-xl border border-gray-800 flex flex-col items-center">
+            <label for="trebleSlider" class="text-[10px] font-mono text-gray-400 mb-1">TREBLE (8kHz)</label>
+            <input type="range" id="trebleSlider" min="-12" max="12" value="0" step="0.5" class="w-full">
+            <span id="trebleVal" class="text-[11px] font-mono text-brentRose mt-1">0 dB</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Right Column: Queue (Admin-Only) & Listener Chat (4 Cols) -->
+    <section class="lg:col-span-4 flex flex-col gap-6">
+
+      <!-- Admin Station Queue & Upload Deck (Completely Hidden by Default for Regular Listeners) -->
+      <div id="discographyQueueContainer" class="bg-brentPanel border border-rose-950/30 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-xl flex-col hidden">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-list-ul text-brentRose"></i>
+            <h3 class="font-display text-xs font-bold tracking-wider text-white">DISCOGRAPHY QUEUE</h3>
+          </div>
+          <span id="queueBadgeCount" class="text-[10px] font-mono text-rose-300 bg-rose-950 border border-rose-800/60 px-2 py-0.5 rounded-full">
+            5 Tracks
+          </span>
+        </div>
+
+        <!-- Admin Only Management View -->
+        <div id="queueAdminView" class="space-y-3">
+          <!-- File Upload Dropzone for MP3/WAV -->
+          <div class="border-2 border-dashed border-rose-800/60 hover:border-brentRose rounded-xl p-3 bg-brentBlack/60 text-center transition cursor-pointer relative" id="uploadDropzone">
+            <input type="file" id="audioFileInput" accept="audio/mp3,audio/wav,audio/*" multiple class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+            <i class="fa-solid fa-cloud-arrow-up text-brentRose text-lg mb-1"></i>
+            <p class="text-xs font-semibold text-gray-200">Upload MP3 / WAV Tracks</p>
+            <p class="text-[10px] text-gray-400">Click or drag &amp; drop audio files to append to queue</p>
+          </div>
+
+          <div id="playlistItems" class="space-y-2 max-h-64 overflow-y-auto pr-1">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Listener Chat & Song Request Form -->
+      <div class="bg-brentPanel border border-rose-950/30 backdrop-blur-xl rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col h-96">
+        <div class="flex items-center justify-between mb-2 pb-2 border-b border-gray-800">
+          <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-comments text-brentCyan text-xs"></i>
+            <h3 class="font-display text-xs font-bold tracking-wider text-white">SONDER COMMUNITY CHAT</h3>
+          </div>
+          <button id="editUsernameBtn" class="text-[10px] font-mono text-brentCyan hover:underline focus:outline-none" title="Change Chat Username">
+            <i class="fa-solid fa-pen mr-1"></i><span id="usernameDisplay">Set Nick</span>
+          </button>
+        </div>
+
+        <div id="chatMessages" class="flex-grow overflow-y-auto space-y-2 text-xs pr-1 mb-2">
+          <div class="bg-brentBlack/60 p-2 rounded-lg border border-gray-800">
+            <span class="text-brentRose font-bold">StationBot:</span>
+            <span class="text-gray-300">Welcome to Brent Radio 24/7. Type a message or 'request: Track Name' to join the chat!</span>
+          </div>
+        </div>
+
+        <form id="chatForm" class="flex gap-2">
+          <input type="text" id="chatInput" placeholder="Message or 'request: Track Name'..." class="flex-grow bg-brentBlack border border-gray-800 focus:border-brentRose rounded-xl px-3 py-1.5 text-xs text-gray-200 outline-none" aria-label="Type message or request">
+          <button type="submit" class="px-3 py-1.5 bg-brentRose text-white rounded-xl text-xs font-bold hover:opacity-90 transition">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Username Creation Modal -->
+  <div id="usernameModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-brentDark border border-rose-900/60 rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+        <div class="flex items-center space-x-2">
+          <i class="fa-solid fa-user-tag text-brentCyan text-lg"></i>
+          <h3 class="font-display text-xs font-bold text-white uppercase tracking-wider">Choose Chat Username</h3>
+        </div>
+        <button id="closeUsernameModal" aria-label="Close Username Modal" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <div>
+        <label for="usernameInput" class="text-xs text-gray-300 block mb-1">Display Username:</label>
+        <input type="text" id="usernameInput" maxlength="20" placeholder="e.g. SonderListener99" class="w-full bg-brentBlack border border-gray-800 focus:border-brentCyan rounded-xl px-3 py-2 text-xs text-white outline-none font-mono">
+        <p id="usernameError" class="text-[10px] text-rose-500 mt-1 hidden">Please enter a valid username (min 2 characters).</p>
+      </div>
+      <div class="flex gap-2 justify-end">
+        <button id="submitUsernameBtn" class="w-full py-2 bg-brentCyan text-black font-bold rounded-xl text-xs hover:opacity-90 transition shadow-lg shadow-cyan-950/60">
+          JOIN CHAT &amp; SEND
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Passcode Modal -->
+  <div id="adminPasscodeModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-brentDark border border-rose-900/60 rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+        <div class="flex items-center space-x-2">
+          <i class="fa-solid fa-user-shield text-brentRose text-lg"></i>
+          <h3 class="font-display text-xs font-bold text-white uppercase tracking-wider">Station Admin Authentication</h3>
+        </div>
+        <button id="closeAdminModal" aria-label="Close Admin Passcode Modal" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <div>
+        <label for="adminPassInput" class="text-xs text-gray-300 block mb-1">Enter Admin Passcode:</label>
+        <input type="password" id="adminPassInput" class="w-full bg-brentBlack border border-gray-800 focus:border-brentRose rounded-xl px-3 py-2 text-xs text-white outline-none font-mono">
+        <p id="adminPassError" class="text-[10px] text-rose-500 mt-1 hidden">Incorrect passcode.</p>
+      </div>
+      <div class="flex gap-2 justify-end">
+        <button id="submitAdminPassBtn" class="w-full py-2 bg-brentRose text-white font-bold rounded-xl text-xs hover:opacity-90 transition shadow-lg shadow-rose-950/60">
+          AUTHENTICATE
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- GitHub Repository Code Inspector Modal -->
+  <div id="githubModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-brentDark border border-rose-900/50 rounded-2xl max-w-4xl w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+      <div class="p-4 border-b border-gray-800 flex items-center justify-between bg-brentBlack">
+        <div class="flex items-center space-x-3">
+          <i class="fa-brands fa-github text-xl text-brentRose"></i>
+          <div>
+            <h3 class="font-display text-sm font-bold text-white">brent-faiyaz-radio-247 / repository</h3>
+            <p class="text-[11px] text-gray-400 font-mono">Modular Code Architecture &amp; File System Structure</p>
+          </div>
+        </div>
+        <button id="closeGithubModal" aria-label="Close Repository Modal" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+
+      <!-- Tab File Navigation -->
+      <div class="grid grid-cols-1 md:grid-cols-12 flex-grow overflow-hidden">
+        <!-- Sidebar File Tree -->
+        <div class="md:col-span-4 bg-brentBlack/80 border-r border-gray-800 p-3 space-y-1 font-mono text-xs overflow-y-auto">
+          <div class="text-gray-500 uppercase font-bold text-[10px] mb-2">Project Files</div>
+          <button class="repo-file-btn w-full text-left px-2.5 py-1.5 rounded bg-rose-950/80 text-rose-300 flex items-center gap-2" data-file="readme">
+            <i class="fa-solid fa-file-lines text-brentRose"></i> README.md
+          </button>
+          <button class="repo-file-btn w-full text-left px-2.5 py-1.5 rounded text-gray-300 hover:bg-gray-800 flex items-center gap-2" data-file="package">
+            <i class="fa-solid fa-code text-cyan-400"></i> package.json
+          </button>
+          <button class="repo-file-btn w-full text-left px-2.5 py-1.5 rounded text-gray-300 hover:bg-gray-800 flex items-center gap-2" data-file="audioEngine">
+            <i class="fa-solid fa-file-code text-amber-400"></i> src/audio/AudioEngine.js
+          </button>
+          <button class="repo-file-btn w-full text-left px-2.5 py-1.5 rounded text-gray-300 hover:bg-gray-800 flex items-center gap-2" data-file="compliance">
+            <i class="fa-solid fa-shield-halved text-green-400"></i> legal/Compliance.json
+          </button>
+        </div>
+
+        <!-- File Content Display -->
+        <div class="md:col-span-8 p-4 bg-brentBlack font-mono text-xs overflow-y-auto text-gray-300">
+          <pre id="repoFileContent" class="whitespace-pre-wrap leading-relaxed">// Loading file content...</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legal Privacy & Terms Modal -->
+  <div id="legalModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+    <div class="bg-brentDark border border-gray-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-4">
+      <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+        <h3 id="legalModalTitle" class="font-display text-sm font-bold text-white">Privacy Policy &amp; Legal Standard</h3>
+        <button id="closeLegalModal" aria-label="Close Legal Modal" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+      <div id="legalModalBody" class="text-xs text-gray-300 space-y-3 max-h-80 overflow-y-auto pr-1">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- GDPR / CCPA Cookie Consent Banner -->
+  <div id="cookieBanner" class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-40 bg-brentDark/95 border border-rose-900/50 p-4 rounded-xl shadow-2xl backdrop-blur-md flex flex-col gap-3">
+    <div class="flex items-start gap-3">
+      <i class="fa-solid fa-cookie-bite text-brentRose text-lg mt-0.5"></i>
+      <div class="text-xs text-gray-300">
+        <p class="font-bold text-white">Privacy & Cookie Preferences</p>
+        <p class="text-gray-400 mt-1">We use cookies and local storage to store audio equalizer settings, stream preferences, and legal consent (GDPR / CCPA compliant).</p>
+      </div>
+    </div>
+    <div class="flex items-center justify-end gap-2 text-xs">
+      <button id="acceptCookiesBtn" class="px-4 py-1.5 bg-brentRose text-white font-bold rounded-lg hover:opacity-90 transition">
+        Accept &amp; Continue
+      </button>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-6 left-6 z-50 bg-brentDark border border-brentRose text-white px-4 py-3 rounded-xl shadow-2xl backdrop-blur-md transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3 max-w-sm">
+    <i id="toastIcon" class="fa-solid fa-circle-info text-brentRose"></i>
+    <span id="toastMsg" class="text-xs font-medium">Notification</span>
+  </div>
+
+  <!-- Footer with Legal Compliance Links -->
+  <footer class="relative z-10 w-full border-t border-gray-900 bg-brentBlack/95 py-4 px-6 flex flex-wrap items-center justify-between text-xs text-gray-500 font-mono gap-3">
+    <div>
+      &copy; BRENT RADIO 24/7 &bull; Dedicated Fan & Audio Engine Project
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="legal-link hover:text-brentRose transition" data-type="privacy">Privacy Policy</button>
+      <button class="legal-link hover:text-brentRose transition" data-type="terms">Terms of Use</button>
+      <button class="legal-link hover:text-brentRose transition" data-type="licensing">Music Licensing</button>
+    </div>
+  </footer>
+
+  <!-- JavaScript Audio Engine, Accessibility & Repo Viewer Logic -->
+  <script>
+    /* ==========================================================================
+       BRENT RADIO 24/7 ENGINE & REPOSITORY SIMULATION
+       ========================================================================== */
+
+    const STATE = {
+      isPlaying: false,
+      isMuted: false,
+      isAdminLoggedIn: false,
+      username: localStorage.getItem('brent_chat_username') || null,
+      pendingChatMessage: '',
+      volume: 0.8,
+      visualizerMode: 'bars', // 'bars' | 'wave' | 'radial'
+      highContrast: false,
+      currentTrackIndex: 0,
+      playlist: [
+        {
+          title: "ALL MINE",
+          album: "WASTELAND",
+          artist: "Brent Faiyaz",
+          art: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80",
+          audioUrl: null
+        },
+        {
+          title: "DEAD MAN WALKING",
+          album: "WASTELAND",
+          artist: "Brent Faiyaz",
+          art: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=400&q=80",
+          audioUrl: null
+        },
+        {
+          title: "GRAVITY (feat. Tyler, The Creator)",
+          album: "Sonder Wave",
+          artist: "Brent Faiyaz",
+          art: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=400&q=80",
+          audioUrl: null
+        },
+        {
+          title: "TRUST",
+          album: "F**k the World",
+          artist: "Brent Faiyaz",
+          art: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=400&q=80",
+          audioUrl: null
+        },
+        {
+          title: "WASTELAND AMBIENT INTERLUDE",
+          album: "24/7 Live Stream",
+          artist: "Sonder Engine",
+          art: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=400&q=80",
+          audioUrl: null
+        }
+      ]
+    };
+
+    // GitHub Project Files Content Simulation
+    const GITHUB_FILES = {
+      readme: `# BRENT RADIO - 24/7 Brent Faiyaz Audio Stream
+
+An immersive 24/7 streaming platform dedicated to Brent Faiyaz, Sonder, and ambient R&B soundscapes.
+
+## Features
+- **Admin DJ Console**: Passcode protected track uploads and queue management.
+- **Spinning Vinyl Graphic**: Rotates on track playback with live metadata labels.
+- **24/7 Procedural Web Audio Engine**: Uninterrupted audio synth playback.
+- **Custom Spectrum Visualizer**: Dynamic HTML5 Canvas rendering (Bars, Waveform, Radial).
+- **3-Band Frequency Equalizer**: Custom biquad filter tone shaping.
+- **Accessibility (WCAG 2.1 AA)**: High contrast toggle, screen reader support, keyboard shortcuts.
+`,
+      package: `{
+  "name": "brent-radio-247",
+  "version": "2.0.0",
+  "description": "24/7 Brent Faiyaz Web Audio Streaming Station",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  }
+}`,
+      audioEngine: `// AudioEngine.js - Web Audio API Sound Generator
+export class AudioEngine {
+  constructor() {
+    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    this.analyser = this.ctx.createAnalyser();
+    this.analyser.fftSize = 256;
+  }
+}`,
+      compliance: `{
+  "compliance": "WCAG 2.1 AA",
+  "privacy": "GDPR & CCPA Compliant",
+  "licensing": "Educational & Fan Broadcast Disclaimer"
+}`
+    };
+
+    // Web Audio Nodes
+    let audioCtx = null;
+    let analyserNode = null;
+    let bassFilterNode = null;
+    let midFilterNode = null;
+    let trebleFilterNode = null;
+    let masterGainNode = null;
+    let synthTimer = null;
+    let htmlAudioElement = null;
+    let vinylRotationDeg = 0;
+
+    // Elements
+    const elements = {
+      appBody: document.getElementById('appBody'),
+      visualizerCanvas: document.getElementById('visualizerCanvas'),
+      bgCanvas: document.getElementById('bgCanvas'),
+      startStreamBtn: document.getElementById('startStreamBtn'),
+      playOverlay: document.getElementById('playOverlay'),
+      mainPlayBtn: document.getElementById('mainPlayBtn'),
+      mainPlayIcon: document.getElementById('mainPlayIcon'),
+      muteBtn: document.getElementById('muteBtn'),
+      muteIcon: document.getElementById('muteIcon'),
+      volumeSlider: document.getElementById('volumeSlider'),
+      progressBar: document.getElementById('progressBar'),
+      progressBarContainer: document.getElementById('progressBarContainer'),
+      currentTime: document.getElementById('currentTime'),
+      durationTime: document.getElementById('durationTime'),
+      currentTrackTitle: document.getElementById('currentTrackTitle'),
+      currentTrackArtist: document.getElementById('currentTrackArtist'),
+      albumBadge: document.getElementById('albumBadge'),
+      audioSourceText: document.getElementById('audioSourceText'),
+      vinylRecord: document.getElementById('vinylRecord'),
+      vinylSongLabel: document.getElementById('vinylSongLabel'),
+      vinylArtistLabel: document.getElementById('vinylArtistLabel'),
+      adminLoginToggleBtn: document.getElementById('adminLoginToggleBtn'),
+      adminLockIcon: document.getElementById('adminLockIcon'),
+      adminBtnText: document.getElementById('adminBtnText'),
+      adminPasscodeModal: document.getElementById('adminPasscodeModal'),
+      closeAdminModal: document.getElementById('closeAdminModal'),
+      adminPassInput: document.getElementById('adminPassInput'),
+      adminPassError: document.getElementById('adminPassError'),
+      submitAdminPassBtn: document.getElementById('submitAdminPassBtn'),
+      discographyQueueContainer: document.getElementById('discographyQueueContainer'),
+      queueBadgeCount: document.getElementById('queueBadgeCount'),
+      audioFileInput: document.getElementById('audioFileInput'),
+      playlistItems: document.getElementById('playlistItems'),
+      contrastToggleBtn: document.getElementById('contrastToggleBtn'),
+      githubModalBtn: document.getElementById('githubModalBtn'),
+      githubModal: document.getElementById('githubModal'),
+      closeGithubModal: document.getElementById('closeGithubModal'),
+      repoFileContent: document.getElementById('repoFileContent'),
+      cookieBanner: document.getElementById('cookieBanner'),
+      acceptCookiesBtn: document.getElementById('acceptCookiesBtn'),
+      legalModal: document.getElementById('legalModal'),
+      closeLegalModal: document.getElementById('closeLegalModal'),
+      legalModalTitle: document.getElementById('legalModalTitle'),
+      legalModalBody: document.getElementById('legalModalBody'),
+      visModeBtn: document.getElementById('visModeBtn'),
+      visModeText: document.getElementById('visModeText'),
+      bassSlider: document.getElementById('bassSlider'),
+      midSlider: document.getElementById('midSlider'),
+      trebleSlider: document.getElementById('trebleSlider'),
+      bassVal: document.getElementById('bassVal'),
+      midVal: document.getElementById('midVal'),
+      trebleVal: document.getElementById('trebleVal'),
+      chatMessages: document.getElementById('chatMessages'),
+      chatForm: document.getElementById('chatForm'),
+      chatInput: document.getElementById('chatInput'),
+      usernameModal: document.getElementById('usernameModal'),
+      closeUsernameModal: document.getElementById('closeUsernameModal'),
+      usernameInput: document.getElementById('usernameInput'),
+      usernameError: document.getElementById('usernameError'),
+      submitUsernameBtn: document.getElementById('submitUsernameBtn'),
+      editUsernameBtn: document.getElementById('editUsernameBtn'),
+      usernameDisplay: document.getElementById('usernameDisplay')
+    };
+
+    let visCtx, bgCtx;
+
+    window.onload = function() {
+      initCanvases();
+      setupEventListeners();
+      setupEqualizer();
+      renderPlaylist();
+      checkCookieConsent();
+      updateUsernameDisplay();
+      startBgAnimation();
+      animateVinylRecord();
+    };
+
+    function initCanvases() {
+      if (elements.visualizerCanvas) {
+        visCtx = elements.visualizerCanvas.getContext('2d');
+        elements.visualizerCanvas.width = elements.visualizerCanvas.clientWidth || 600;
+        elements.visualizerCanvas.height = elements.visualizerCanvas.clientHeight || 300;
+      }
+      if (elements.bgCanvas) {
+        bgCtx = elements.bgCanvas.getContext('2d');
+        elements.bgCanvas.width = window.innerWidth;
+        elements.bgCanvas.height = window.innerHeight;
+      }
+    }
+
+    function initWebAudioAPI() {
+      if (audioCtx) return;
+
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+
+        analyserNode = audioCtx.createAnalyser();
+        analyserNode.fftSize = 256;
+
+        bassFilterNode = audioCtx.createBiquadFilter();
+        bassFilterNode.type = 'lowshelf';
+        bassFilterNode.frequency.value = 80;
+
+        midFilterNode = audioCtx.createBiquadFilter();
+        midFilterNode.type = 'peaking';
+        midFilterNode.frequency.value = 1000;
+
+        trebleFilterNode = audioCtx.createBiquadFilter();
+        trebleFilterNode.type = 'highshelf';
+        trebleFilterNode.frequency.value = 8000;
+
+        masterGainNode = audioCtx.createGain();
+        masterGainNode.gain.value = STATE.volume;
+
+        bassFilterNode.connect(midFilterNode);
+        midFilterNode.connect(trebleFilterNode);
+        trebleFilterNode.connect(masterGainNode);
+        masterGainNode.connect(analyserNode);
+        analyserNode.connect(audioCtx.destination);
+
+        elements.playOverlay.classList.add('opacity-0', 'pointer-events-none');
+        drawVisualizer();
+      } catch (err) {
+        console.error('Web Audio initialization error', err);
+      }
+    }
+
+    /* ==========================================================================
+       SPINNING VINYL GRAPHIC ANIMATION
+       ========================================================================== */
+
+    function animateVinylRecord() {
+      if (STATE.isPlaying) {
+        vinylRotationDeg = (vinylRotationDeg + 0.8) % 360;
+        if (elements.vinylRecord) {
+          elements.vinylRecord.style.transform = `rotate(${vinylRotationDeg}deg)`;
+        }
+      }
+      requestAnimationFrame(animateVinylRecord);
+    }
+
+    /* ==========================================================================
+       VISUALIZER & BACKGROUND ANIMATION
+       ========================================================================== */
+
+    function drawVisualizer() {
+      requestAnimationFrame(drawVisualizer);
+      if (!analyserNode || !visCtx) return;
+
+      const bufferLength = analyserNode.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      analyserNode.getByteFrequencyData(dataArray);
+
+      const width = elements.visualizerCanvas.width;
+      const height = elements.visualizerCanvas.height;
+
+      visCtx.clearRect(0, 0, width, height);
+
+      if (STATE.visualizerMode === 'bars') {
+        const barWidth = (width / bufferLength) * 2.5;
+        let x = 0;
+        for (let i = 0; i < bufferLength; i++) {
+          const barHeight = (dataArray[i] / 255) * height;
+          const gradient = visCtx.createLinearGradient(0, height, 0, 0);
+          gradient.addColorStop(0, '#e11d48');
+          gradient.addColorStop(1, '#06b6d4');
+
+          visCtx.fillStyle = gradient;
+          visCtx.fillRect(x, height - barHeight, barWidth - 1, barHeight);
+          x += barWidth;
+        }
+      } else if (STATE.visualizerMode === 'wave') {
+        visCtx.beginPath();
+        visCtx.lineWidth = 2;
+        visCtx.strokeStyle = '#e11d48';
+        const sliceWidth = width / bufferLength;
+        let x = 0;
+        for (let i = 0; i < bufferLength; i++) {
+          const v = dataArray[i] / 128.0;
+          const y = (v * height) / 2;
+          if (i === 0) visCtx.moveTo(x, y);
+          else visCtx.lineTo(x, y);
+          x += sliceWidth;
+        }
+        visCtx.lineTo(width, height / 2);
+        visCtx.stroke();
+      } else if (STATE.visualizerMode === 'radial') {
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const radius = Math.min(centerX, centerY) - 20;
+
+        for (let i = 0; i < bufferLength; i++) {
+          const rads = (Math.PI * 2 / bufferLength) * i;
+          const barHeight = (dataArray[i] / 255) * 50;
+          const x1 = centerX + Math.cos(rads) * radius;
+          const y1 = centerY + Math.sin(rads) * radius;
+          const x2 = centerX + Math.cos(rads) * (radius + barHeight);
+          const y2 = centerY + Math.sin(rads) * (radius + barHeight);
+
+          visCtx.beginPath();
+          visCtx.moveTo(x1, y1);
+          visCtx.lineTo(x2, y2);
+          visCtx.lineWidth = 2;
+          visCtx.strokeStyle = '#06b6d4';
+          visCtx.stroke();
+        }
+      }
+    }
+
+    function startBgAnimation() {
+      if (!bgCtx) return;
+      let particles = Array.from({ length: 30 }, () => ({
+        x: Math.random() * elements.bgCanvas.width,
+        y: Math.random() * elements.bgCanvas.height,
+        r: Math.random() * 2 + 1,
+        dy: Math.random() * 0.5 + 0.2
+      }));
+
+      function renderBg() {
+        bgCtx.clearRect(0, 0, elements.bgCanvas.width, elements.bgCanvas.height);
+        bgCtx.fillStyle = 'rgba(225, 29, 72, 0.4)';
+        particles.forEach(p => {
+          bgCtx.beginPath();
+          bgCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          bgCtx.fill();
+          p.y -= p.dy;
+          if (p.y < 0) p.y = elements.bgCanvas.height;
+        });
+        requestAnimationFrame(renderBg);
+      }
+      renderBg();
+    }
+
+    /* ==========================================================================
+       SYNTHESIZER CONTINUOUS R&B AUDIO GENERATOR
+       ========================================================================== */
+
+    function startSynthStream() {
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      playRnBChord();
+      if (synthTimer) clearInterval(synthTimer);
+      synthTimer = setInterval(playRnBChord, 4000);
+    }
+
+    function stopSynthStream() {
+      if (synthTimer) {
+        clearInterval(synthTimer);
+        synthTimer = null;
+      }
+    }
+
+    function playRnBChord() {
+      if (!audioCtx || htmlAudioElement) return;
+
+      const chords = [
+        [138.59, 174.61, 207.65, 261.63, 311.13],
+        [174.61, 207.65, 261.63, 311.13],
+        [116.54, 138.59, 174.61, 207.65, 261.63],
+        [155.56, 185.00, 233.08, 277.18]
+      ];
+
+      const chord = chords[Math.floor(Math.random() * chords.length)];
+      const now = audioCtx.currentTime;
+
+      chord.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const noteGain = audioCtx.createGain();
+
+        osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+        osc.frequency.setValueAtTime(freq, now);
+        osc.detune.setValueAtTime((Math.random() - 0.5) * 12, now);
+
+        noteGain.gain.setValueAtTime(0, now);
+        noteGain.gain.linearRampToValueAtTime(0.06, now + 1.2);
+        noteGain.gain.exponentialRampToValueAtTime(0.0001, now + 3.8);
+
+        osc.connect(noteGain);
+        noteGain.connect(bassFilterNode);
+
+        osc.start(now);
+        osc.stop(now + 3.9);
+      });
+    }
+
+    /* ==========================================================================
+       PLAYER CONTROLS & TRACK MANAGEMENT
+       ========================================================================== */
+
+    function togglePlay() {
+      if (!audioCtx) initWebAudioAPI();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      if (STATE.isPlaying) {
+        pauseStream();
+      } else {
+        playStream();
+      }
+    }
+
+    function playStream() {
+      STATE.isPlaying = true;
+      elements.mainPlayIcon.className = 'fa-solid fa-pause text-lg';
+      
+      const track = STATE.playlist[STATE.currentTrackIndex];
+      if (track && track.audioUrl) {
+        playCustomAudio(track.audioUrl);
+      } else {
+        startSynthStream();
+      }
+      showToast('24/7 Stream Synchronized');
+    }
+
+    function pauseStream() {
+      STATE.isPlaying = false;
+      elements.mainPlayIcon.className = 'fa-solid fa-play text-lg ml-0.5';
+      stopSynthStream();
+      if (htmlAudioElement) htmlAudioElement.pause();
+    }
+
+    function playCustomAudio(url) {
+      stopSynthStream();
+      if (!htmlAudioElement) {
+        htmlAudioElement = new Audio();
+        const source = audioCtx.createMediaElementSource(htmlAudioElement);
+        source.connect(bassFilterNode);
+
+        htmlAudioElement.ontimeupdate = () => {
+          if (htmlAudioElement.duration) {
+            const pct = (htmlAudioElement.currentTime / htmlAudioElement.duration) * 100;
+            elements.progressBar.style.width = `${pct}%`;
+            elements.currentTime.textContent = formatTime(htmlAudioElement.currentTime);
+            elements.durationTime.textContent = formatTime(htmlAudioElement.duration);
+          }
+        };
+
+        htmlAudioElement.onended = () => {
+          STATE.currentTrackIndex = (STATE.currentTrackIndex + 1) % STATE.playlist.length;
+          selectTrack(STATE.currentTrackIndex);
+        };
+      }
+      htmlAudioElement.src = url;
+      htmlAudioElement.play();
+    }
+
+    function formatTime(seconds) {
+      const mins = Math.floor(seconds / 60);
+      const secs = Math.floor(seconds % 60);
+      return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function selectTrack(index) {
+      STATE.currentTrackIndex = index;
+      const track = STATE.playlist[index];
+
+      elements.currentTrackTitle.textContent = track.title;
+      elements.currentTrackArtist.textContent = `${track.artist} • Sonder Stream`;
+      elements.albumBadge.textContent = `Album: ${track.album}`;
+      elements.vinylSongLabel.textContent = track.title;
+      elements.vinylArtistLabel.textContent = track.artist;
+
+      renderPlaylist();
+      if (STATE.isPlaying) {
+        if (track.audioUrl) {
+          playCustomAudio(track.audioUrl);
+        } else {
+          if (htmlAudioElement) htmlAudioElement.pause();
+          startSynthStream();
+        }
+      }
+    }
+
+    function renderPlaylist() {
+      elements.playlistItems.innerHTML = '';
+      elements.queueBadgeCount.textContent = `${STATE.playlist.length} Tracks`;
+
+      STATE.playlist.forEach((track, idx) => {
+        const isActive = idx === STATE.currentTrackIndex;
+        const item = document.createElement('div');
+        item.className = `flex items-center justify-between p-2.5 rounded-xl border transition ${
+          isActive ? 'bg-rose-950/70 border-brentRose text-white' : 'bg-brentBlack/60 border-gray-800 text-gray-300'
+        }`;
+        
+        item.innerHTML = `
+          <div class="flex items-center space-x-2.5 overflow-hidden cursor-pointer" onclick="selectTrack(${idx})">
+            <div class="w-7 h-7 rounded-lg ${isActive ? 'bg-brentRose text-white' : 'bg-gray-800 text-gray-400'} flex items-center justify-center font-mono text-xs flex-shrink-0">
+              ${isActive ? '<i class="fa-solid fa-compact-disc animate-spin"></i>' : (idx + 1)}
+            </div>
+            <div class="truncate">
+              <h4 class="text-xs font-semibold truncate ${isActive ? 'text-brentRose' : 'text-gray-200'}">${track.title}</h4>
+              <p class="text-[10px] text-gray-400 truncate">${track.artist}</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="text-[9px] font-mono px-2 py-0.5 rounded bg-brentBlack text-gray-400 border border-gray-800">${track.audioUrl ? 'FILE' : 'SYNTH'}</span>
+            ${STATE.isAdminLoggedIn ? `<button onclick="removeTrack(${idx})" class="p-1 text-gray-500 hover:text-brentRose transition" title="Remove Track"><i class="fa-solid fa-trash-can text-xs"></i></button>` : ''}
+          </div>
+        `;
+        elements.playlistItems.appendChild(item);
+      });
+    }
+
+    function removeTrack(index) {
+      if (!STATE.isAdminLoggedIn) return;
+      if (STATE.playlist.length <= 1) {
+        showToast("Cannot remove the last remaining station track.");
+        return;
+      }
+      const removed = STATE.playlist.splice(index, 1)[0];
+      if (STATE.currentTrackIndex >= STATE.playlist.length) {
+        STATE.currentTrackIndex = 0;
+      }
+      selectTrack(STATE.currentTrackIndex);
+      showToast(`Removed track: ${removed.title}`);
+    }
+
+    /* ==========================================================================
+       ADMIN AUTHENTICATION & FILE UPLOAD
+       ========================================================================== */
+
+    function toggleAdminModal() {
+      if (STATE.isAdminLoggedIn) {
+        // Logout Admin
+        STATE.isAdminLoggedIn = false;
+        elements.adminLockIcon.className = 'fa-solid fa-lock text-xs';
+        elements.adminBtnText.textContent = 'ADMIN DJ LOGIN';
+        elements.discographyQueueContainer.classList.add('hidden');
+        elements.discographyQueueContainer.classList.remove('flex');
+        renderPlaylist();
+        showToast('Logged out of Admin DJ mode.');
+      } else {
+        elements.adminPasscodeModal.classList.remove('hidden');
+        elements.adminPassInput.value = '';
+        elements.adminPassError.classList.add('hidden');
+      }
+    }
+
+    function authenticateAdmin() {
+      const passcode = elements.adminPassInput.value.trim();
+      if (passcode === 'spendzaspadez0311') {
+        STATE.isAdminLoggedIn = true;
+        elements.adminPasscodeModal.classList.add('hidden');
+        elements.adminLockIcon.className = 'fa-solid fa-unlock text-xs text-brentRose';
+        elements.adminBtnText.textContent = 'ADMIN (ACTIVE)';
+        elements.discographyQueueContainer.classList.remove('hidden');
+        elements.discographyQueueContainer.classList.add('flex');
+        renderPlaylist();
+        showToast('Admin DJ Authenticated! Discography Queue unlocked.');
+      } else {
+        elements.adminPassError.classList.remove('hidden');
+      }
+    }
+
+    function handleFileUpload(files) {
+      if (!files || !files.length) return;
+      Array.from(files).forEach(file => {
+        const url = URL.createObjectURL(file);
+        const nameWithoutExt = file.name.replace(/\.[^/.]+$/, "");
+        STATE.playlist.push({
+          title: nameWithoutExt.toUpperCase(),
+          album: "ADMIN UPLOAD",
+          artist: "Brent Faiyaz",
+          art: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80",
+          audioUrl: url
+        });
+      });
+      renderPlaylist();
+      showToast(`Added ${files.length} track(s) to discography queue.`);
+    }
+
+    /* ==========================================================================
+       SOUND EQUALIZER PRESETS & CONTROLS
+       ========================================================================== */
+
+    function setupEqualizer() {
+      elements.bassSlider.oninput = (e) => {
+        const val = parseFloat(e.target.value);
+        if (bassFilterNode) bassFilterNode.gain.value = val;
+        elements.bassVal.textContent = `${val > 0 ? '+' : ''}${val} dB`;
+      };
+
+      elements.midSlider.oninput = (e) => {
+        const val = parseFloat(e.target.value);
+        if (midFilterNode) midFilterNode.gain.value = val;
+        elements.midVal.textContent = `${val > 0 ? '+' : ''}${val} dB`;
+      };
+
+      elements.trebleSlider.oninput = (e) => {
+        const val = parseFloat(e.target.value);
+        if (trebleFilterNode) trebleFilterNode.gain.value = val;
+        elements.trebleVal.textContent = `${val > 0 ? '+' : ''}${val} dB`;
+      };
+
+      document.querySelectorAll('.eq-preset-btn').forEach(btn => {
+        btn.onclick = () => applyPreset(btn.dataset.preset);
+      });
+    }
+
+    function applyPreset(preset) {
+      let b = 0, m = 0, t = 0;
+      if (preset === 'wasteland') { b = 4; m = -2; t = 3; }
+      else if (preset === 'synth') { b = 2; m = 1; t = -2; }
+      else if (preset === 'bass') { b = 8; m = -1; t = 1; }
+      else if (preset === 'vocal') { b = -2; m = 5; t = 4; }
+
+      elements.bassSlider.value = b;
+      elements.midSlider.value = m;
+      elements.trebleSlider.value = t;
+
+      if (bassFilterNode) bassFilterNode.gain.value = b;
+      if (midFilterNode) midFilterNode.gain.value = m;
+      if (trebleFilterNode) trebleFilterNode.gain.value = t;
+
+      elements.bassVal.textContent = `${b > 0 ? '+' : ''}${b} dB`;
+      elements.midVal.textContent = `${m > 0 ? '+' : ''}${m} dB`;
+      elements.trebleVal.textContent = `${t > 0 ? '+' : ''}${t} dB`;
+
+      showToast(`EQ Preset Applied: ${preset.toUpperCase()}`);
+    }
+
+    /* ==========================================================================
+       COMMUNITY CHAT & LEGAL MODAL EVENT HANDLERS
+       ========================================================================== */
+
+    function updateUsernameDisplay() {
+      if (STATE.username) {
+        elements.usernameDisplay.textContent = STATE.username;
+      } else {
+        elements.usernameDisplay.textContent = 'Set Nick';
+      }
+    }
+
+    function openUsernameModal(msg = '') {
+      STATE.pendingChatMessage = msg;
+      elements.usernameInput.value = STATE.username || '';
+      elements.usernameError.classList.add('hidden');
+      elements.usernameModal.classList.remove('hidden');
+    }
+
+    function saveUsernameAndSend() {
+      const name = elements.usernameInput.value.trim();
+      if (name.length < 2) {
+        elements.usernameError.classList.remove('hidden');
+        return;
+      }
+      STATE.username = name;
+      localStorage.setItem('brent_chat_username', name);
+      updateUsernameDisplay();
+      elements.usernameModal.classList.add('hidden');
+      showToast(`Username set to "${name}"`);
+
+      if (STATE.pendingChatMessage) {
+        postChatMessage(STATE.pendingChatMessage);
+        STATE.pendingChatMessage = '';
+        elements.chatInput.value = '';
+      }
+    }
+
+    function postChatMessage(msg) {
+      const div = document.createElement('div');
+      div.className = 'bg-brentBlack/60 p-2 rounded-lg border border-gray-800';
+      div.innerHTML = `<span class="text-brentCyan font-bold">${escapeHtml(STATE.username)}:</span> <span class="text-gray-300">${escapeHtml(msg)}</span>`;
+      elements.chatMessages.appendChild(div);
+      elements.chatMessages.scrollTop = elements.chatMessages.scrollHeight;
+    }
+
+    function setupEventListeners() {
+      elements.startStreamBtn.onclick = () => {
+        initWebAudioAPI();
+        playStream();
+      };
+      elements.mainPlayBtn.onclick = togglePlay;
+
+      elements.volumeSlider.oninput = (e) => {
+        STATE.volume = parseFloat(e.target.value);
+        if (masterGainNode) masterGainNode.gain.value = STATE.volume;
+      };
+
+      elements.muteBtn.onclick = () => {
+        STATE.isMuted = !STATE.isMuted;
+        if (masterGainNode) masterGainNode.gain.value = STATE.isMuted ? 0 : STATE.volume;
+      };
+
+      // Admin Controls
+      elements.adminLoginToggleBtn.onclick = toggleAdminModal;
+      elements.closeAdminModal.onclick = () => elements.adminPasscodeModal.classList.add('hidden');
+      elements.submitAdminPassBtn.onclick = authenticateAdmin;
+      elements.adminPassInput.onkeydown = (e) => { if (e.key === 'Enter') authenticateAdmin(); };
+
+      // Username Modal Event Handlers
+      elements.editUsernameBtn.onclick = () => openUsernameModal();
+      elements.closeUsernameModal.onclick = () => elements.usernameModal.classList.add('hidden');
+      elements.submitUsernameBtn.onclick = saveUsernameAndSend;
+      elements.usernameInput.onkeydown = (e) => { if (e.key === 'Enter') saveUsernameAndSend(); };
+
+      // File Upload
+      elements.audioFileInput.onchange = (e) => handleFileUpload(e.target.files);
+
+      // High Contrast Accessibility Toggle
+      elements.contrastToggleBtn.onclick = () => {
+        STATE.highContrast = !STATE.highContrast;
+        elements.appBody.classList.toggle('high-contrast', STATE.highContrast);
+        showToast(STATE.highContrast ? 'High Contrast Mode Enabled' : 'Standard Dark Mode');
+      };
+
+      // GitHub Code Modal Controls
+      elements.githubModalBtn.onclick = () => {
+        elements.githubModal.classList.remove('hidden');
+        loadRepoFile('readme');
+      };
+      elements.closeGithubModal.onclick = () => elements.githubModal.classList.add('hidden');
+
+      document.querySelectorAll('.repo-file-btn').forEach(btn => {
+        btn.onclick = () => {
+          document.querySelectorAll('.repo-file-btn').forEach(b => b.className = 'repo-file-btn w-full text-left px-2.5 py-1.5 rounded text-gray-300 hover:bg-gray-800 flex items-center gap-2');
+          btn.className = 'repo-file-btn w-full text-left px-2.5 py-1.5 rounded bg-rose-950/80 text-rose-300 flex items-center gap-2';
+          loadRepoFile(btn.dataset.file);
+        };
+      });
+
+      // Visualizer Mode
+      elements.visModeBtn.onclick = () => {
+        const modes = ['bars', 'wave', 'radial'];
+        STATE.visualizerMode = modes[(modes.indexOf(STATE.visualizerMode) + 1) % modes.length];
+        elements.visModeText.textContent = STATE.visualizerMode.toUpperCase();
+      };
+
+      // Chat Input Form Submission
+      elements.chatForm.onsubmit = (e) => {
+        e.preventDefault();
+        const msg = elements.chatInput.value.trim();
+        if (!msg) return;
+
+        if (!STATE.username) {
+          openUsernameModal(msg);
+        } else {
+          postChatMessage(msg);
+          elements.chatInput.value = '';
+        }
+      };
+
+      // Legal Modals
+      document.querySelectorAll('.legal-link').forEach(link => {
+        link.onclick = () => openLegalModal(link.dataset.type);
+      });
+      elements.closeLegalModal.onclick = () => elements.legalModal.classList.add('hidden');
+
+      // Cookie Consent
+      elements.acceptCookiesBtn.onclick = () => {
+        localStorage.setItem('brent_cookie_consent', 'true');
+        elements.cookieBanner.classList.add('hidden');
+        showToast('Cookie preferences saved.');
+      };
+    }
+
+    function loadRepoFile(fileKey) {
+      elements.repoFileContent.textContent = GITHUB_FILES[fileKey] || '// File not found';
+    }
+
+    function checkCookieConsent() {
+      if (localStorage.getItem('brent_cookie_consent')) {
+        elements.cookieBanner.classList.add('hidden');
+      }
+    }
+
+    function openLegalModal(type) {
+      elements.legalModal.classList.remove('hidden');
+      if (type === 'privacy') {
+        elements.legalModalTitle.textContent = 'Privacy Policy & Data Security';
+        elements.legalModalBody.innerHTML = `
+          <p>BRENT RADIO respects user privacy under GDPR and CCPA regulations.</p>
+          <p class="mt-2"><strong>Data Collection:</strong> We do not store personal audio streams or user messages permanently on external servers. Equalizer presets and audio preferences are retained locally on your browser using LocalStorage.</p>
+        `;
+      } else if (type === 'terms') {
+        elements.legalModalTitle.textContent = 'Terms of Use';
+        elements.legalModalBody.innerHTML = `
+          <p>By accessing BRENT RADIO 24/7, you agree to use the stream for personal, non-commercial entertainment purposes.</p>
+          <p class="mt-2">Automated web synthesizer streams are generated via client-side Web Audio API technology.</p>
+        `;
+      } else if (type === 'licensing') {
+        elements.legalModalTitle.textContent = 'Music Licensing & Copyright Disclaimer';
+        elements.legalModalBody.innerHTML = `
+          <p>BRENT RADIO is a fan-created, non-profit audio broadcast demonstration celebrating the discography of Brent Faiyaz & Sonder.</p>
+          <p class="mt-2">All trademark and copyright assets belong strictly to Brent Faiyaz, Sonder, Lost Kids, and affiliated record labels.</p>
+        `;
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      setTimeout(() => toast.classList.add('translate-y-24', 'opacity-0'), 3000);
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+  </script>
+</body>
+</html>
